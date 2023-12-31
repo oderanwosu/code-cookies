@@ -20,7 +20,7 @@ export function SearchBar() {
         style={styles.icon}
       />
       <TextInput
-        inpu
+       
         placeholderTextColor={disabledGreyColor}
         style={styles.input}
         placeholder="Search for note..." // Add other TextInput props as needed

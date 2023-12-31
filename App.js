@@ -1,63 +1,181 @@
-import { TouchableNoteWidget } from "./components/touchable-note-widget";
-import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
+import "react-native-gesture-handler";
 import {
   Dimensions,
   SafeAreaView,
-  ScrollView,
-  StyleSheet,
   Text,
+  View,
+  Stylesheet,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity,
-  View,
 } from "react-native";
-import { SearchBar } from "./components/search-bar";
-import { backgroundColor, primaryColor } from "./constants";
-import { NoteWidgetList } from "./components/note-widget-list.js";
+import {
+  accentColor,
+  backgroundColor,
+  disabledGreyColor,
+  foreGroundColor,
+  primaryColor,
+  secondaryColor,
+} from "./constants";
+import {
+  AntDesign,
+  Entypo,
+  FontAwesome,
+  FontAwesome5,
+  Fontisto,
+  Ionicons,
+} from "@expo/vector-icons";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { TouchableNoteWidget } from "./components/touchable-note-widget";
 
-
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 export default function App() {
-  var notes = [{}, {}, {}, {}, {}];
   return (
-    <SafeAreaView style={styles.screenStyle}>
-      <ScrollView>
-        <View style={{ paddingTop: 120 }}>
-          <Text style={styles.h1}>My Code Snippets</Text>
-        </View>
-        <View style = {{  flexDirection: "row", justifyContent: "baseline"}}>
-        <SearchBar/>
+    <SafeAreaView
+      style={{
+        backgroundColor: backgroundColor,
+        flex: 1,
+      }}
+    >
+      <View
+        style={{
+          paddingTop: 120,
+        }}
+      >
+        
+        <View style={{flexDirection: "row", paddingHorizontal: 12, justifyContent: "space-between"}}>
+        <BottomSheetDropDown disabledGreyColor={disabledGreyColor}  />
         <TouchableOpacity>
-          <FontAwesome name="plus-circle" size={24}
-          style={styles.icon}></FontAwesome>
+          <Text style={ {fontSize: 14, fontWeight: "500", color: disabledGreyColor }}>Save</Text>
         </TouchableOpacity>
         </View>
-        
-        <View style={{marginVertical: 24}}>
-         <NoteWidgetList  notes={notes}/>
-        </View>
-      </ScrollView>
+        <TextInput
+          placeholderTextColor={disabledGreyColor}
+          style={styles.input}
+          placeholder="Title Document" // Add other TextInput props as needed
+        />
+        <TextInput style={{paddingHorizontal: 12,  fontSize: 16,}}  multiline placeholder="Begin typing here..." placeholderTextColor={disabledGreyColor}/>
+
+      </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  h1: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: primaryColor,
-  },
+function BottomSheet() {
+  return (
+    <View style={styles.bottomSheet.container}>
+      <View style={styles.bottomSheet.line} />
+      <View style={{ marginHorizontal: 48, paddingVertical: 12 }}>
+        <Text
+          style={{ fontSize: 14, fontWeight: "500", color: disabledGreyColor }}
+        >
+          Select text language
+        </Text>
+      </View>
+      <ScrollView>
+        <RadioButtonOption />
+        <RadioButtonOption />
+        <RadioButtonOption />
+        <RadioButtonOption />
+        <RadioButtonOption />
+        <RadioButtonOption />
+      </ScrollView>
+    </View>
+  );
+}
 
-  screenStyle: {
-    paddingHorizontal: 12,
-    backgroundColor: backgroundColor,
-    flex: 1,
+const styles = StyleSheet.create({
+  bottomSheet: {
+    container: {
+      height: SCREEN_HEIGHT,
+      width: "100%",
+      backgroundColor: "white",
+      position: "absolute",
+      top: SCREEN_HEIGHT / 1.5,
+      borderRadius: 24,
+      backgroundColor: foreGroundColor,
+    },
+    line: {
+      height: 4,
+      width: 72,
+      backgroundColor: disabledGreyColor,
+      alignSelf: "center",
+      marginVertical: 12,
+      borderRadius: 4,
+    },
   },
 
   input: {
     marginHorizontal: 12,
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: "500",
-    height: 40,
+    height: 60,
+    width: "100%",
+    color: "white",
   },
 });
+function RadioButtonOption() {
+  return (
+    <TouchableOpacity>
+      <View
+        style={{
+          width: "100%",
+          height: 64,
+
+          flexDirection: "row",
+          alignItems: "baseline",
+          justifyContent: "flex-start",
+          padding: 12,
+          paddingHorizontal: 48,
+          gap: 8,
+        }}
+      >
+        <View
+          style={{
+            height: 24,
+            width: 24,
+            borderWidth: 2,
+            borderRadius: 16,
+            justifyContent: "center",
+            alignItems: "center",
+            borderColor: disabledGreyColor,
+          }}
+        >
+          <View
+            style={{
+              height: 12,
+              width: 12,
+              backgroundColor: secondaryColor,
+              borderRadius: 16,
+            }}
+          ></View>
+        </View>
+        <Text style={{ fontSize: 20, fontWeight: "500", color: "white" }}>
+          Python
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+    function BottomSheetDropDown({disabledGreyColor}) {
+      return (<View style={{
+  flexDirection: "row",
+  gap: 8,
+  alignItems: "baseline",
+  
+}}>
+          
+          <Entypo name="chevron-thin-down" size={14} color={disabledGreyColor} />
+          <Text style={{
+    fontSize: 20,
+    fontWeight: "500",
+    color: secondaryColor
+  }}>
+            Python
+          </Text>
+        </View>);
+    }
+  
