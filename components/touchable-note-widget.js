@@ -2,7 +2,9 @@ import React from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import { foreGroundColor, secondaryColor, disabledGreyColor } from "../constants";
+import { ColorStyles } from "../styles/colors";
+
+
 export function TouchableNoteWidget() {
   return (
     <TouchableOpacity style={styles.card}>
@@ -10,7 +12,7 @@ export function TouchableNoteWidget() {
         <Ionicons
           name="logo-python"
           size={12}
-          color= {disabledGreyColor}
+          color= {ColorStyles.disabledGreyColor}
           style={styles.icon}
         />
         <Text style={styles.title}>Two Sum Two Challenge</Text>
@@ -24,7 +26,7 @@ export function TouchableNoteWidget() {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: foreGroundColor,
+    backgroundColor: ColorStyles.backgroundColor,
     padding: 12,
     borderRadius: 5,
     width: 180,
@@ -40,6 +42,6 @@ const styles = StyleSheet.create({
 
   subtitle: {
     fontSize: 12,
-    color: secondaryColor,
+    color: ColorStyles.secondaryColor,
   },
 });

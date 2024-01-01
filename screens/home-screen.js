@@ -13,7 +13,8 @@ import {
 import { SearchBar } from "../components/search-bar";
 import { FontAwesome } from "@expo/vector-icons";
 import { NoteWidgetList } from "../components/note-widget-list";
-import { backgroundColor, primaryColor } from "./../constants";
+import { ColorStyles } from "../styles/colors";
+
 
 export function HomeScreen() {
   var notes = [{}, {}, {}, {}, {}];
@@ -59,12 +60,12 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 24,
     fontWeight: "700",
-    color: primaryColor,
+    color: ColorStyles.primaryColor,
   },
 
   screenStyle: {
     paddingHorizontal: 12,
-    backgroundColor: backgroundColor,
+    backgroundColor: ColorStyles.backgroundColor,
     flex: 1,
   },
 

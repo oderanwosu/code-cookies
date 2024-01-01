@@ -2,7 +2,8 @@ import React from "react";
 
 import { TextInput, View, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { disabledGreyColor } from "../constants";
+import { ColorStyles } from "../styles/colors";
+
 
 export function SearchBar() {
   return (
@@ -16,12 +17,12 @@ export function SearchBar() {
       <FontAwesome
         name="search"
         size={16}
-        color={disabledGreyColor}
+        color={ColorStyles.disabledGreyColor}
         style={styles.icon}
       />
       <TextInput
        
-        placeholderTextColor={disabledGreyColor}
+        placeholderTextColor={ColorStyles.disabledGreyColor}
         style={styles.input}
         placeholder="Search for note..." // Add other TextInput props as needed
       />
