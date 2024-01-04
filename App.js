@@ -8,9 +8,15 @@ import { useCallback } from "react";
 import { DocumentModifyingScreen } from "./screens/document-modifying-screen.js";
 import { ColorStyles } from "./styles/colors.js";
 import { FontFamily } from "./styles/typography.js";
-import * as Updates from 'expo-updates';
+import * as Updates from "expo-updates";
 
-
+// const setAndroidWindowSoftInputMode = async () => {
+//   try {
+//     await Updates.setWindowSoftInputMode("adjustResize");
+//   } catch (error) {
+//     console.error("Error setting window soft input mode:", error);
+//   }
+// };
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,14 +39,14 @@ export default function App() {
   return (
     <View
       onLayout={onLayoutRootView}
-      style={{
-        backgroundColor: ColorStyles.backgroundColor,
-        flex: 1,
-
-        colors: ColorStyles.white,
-      }}
+      style={
+        {flex: 1,   backgroundColor: ColorStyles.backgroundColor,}
+      }
     >
       <DocumentModifyingScreen />
-    </View>
+     
+
+      </View>
+   
   );
 }

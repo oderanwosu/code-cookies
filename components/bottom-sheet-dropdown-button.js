@@ -81,7 +81,7 @@ export function BottomSheetDropDownButton(props) {
               {
                 color: props.isBottomSheetOpen
                   ? ColorStyles.disabledGreyColor
-                  : ColorStyles.secondaryColor,
+                  : ColorStyles.secondaryColorBlue,
               },
             ]}
           >
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   selectionText: {
     fontSize: FontSize.large,
     fontWeight: FontWeight.semibold,
-    color: ColorStyles.secondaryColor,
+    color: ColorStyles.secondaryColorBlue,
   },
   bottomSheet: {
     container: {

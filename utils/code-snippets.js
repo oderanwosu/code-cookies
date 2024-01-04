@@ -11,24 +11,34 @@ export const jsCodeSnippets = [
   `const`,
 ].sort();
 
-export const searchCodeSnippets = (text, snippetArray) => {
+export function searchCodeSnippets(text, snippetArray) {
   const query = [];
+
   if (text === undefined || text === "") {
     return [];
   }
+  const words = text.trim().split(" ");
+  const lastWord = words[words.length - 1];
+
   snippetArray.forEach((snippet) => {
     let comparedSnippet =
-      snippet.length > text.length
-        ? snippet.substring(0, text.length)
+      snippet.length > lastWord.length
+        ? snippet.substring(0, lastWord.length)
         : snippet;
-    if (text === comparedSnippet) {
+    if (lastWord == comparedSnippet) {
       query.push(snippet);
     }
   });
 
   return query;
-};
+}
 
-export const getSnippetText = (text, snippet) => {
-    return snippet.substring(text.length, snippet.length)
-};
+export function getSnippetText(text, snippet) {
+  if (text == undefined || text == "") {
+    return [];
+  }
+  const words = text.trim().split(" ");
+  const lastWord = words[words.length - 1];
+
+  return snippet.substring(lastWord.length, snippet.length);
+}

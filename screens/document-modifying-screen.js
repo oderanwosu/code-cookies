@@ -26,10 +26,18 @@ import {
   TextEditorInput,
 } from "../components/text-editor";
 import { KeyboardAccessoryView } from "react-native-keyboard-accessory";
-import { Entypo, FontAwesome, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
+import {
+  Entypo,
+  FontAwesome,
+  Ionicons,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
+import { IntellisenseToolBar } from "../components/intellisense-toolbar";
+import { CompiledCodeModal, CompiledCodeScreen } from "./compiled-code-popup";
 
 export function DocumentModifyingScreen() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [isCompileModalOpen, setIsCompileModalOpen] = useState(false);
   const [selectedLanguage, setSelectedLangauge] = useState("Python");
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
@@ -43,70 +51,95 @@ export function DocumentModifyingScreen() {
   };
 
   return (
-    <GestureHandlerRootView>
-      <ScrollView>
-        <View
-          style={{
-            paddingTop: 100,
-          }}
-        >
-          <View style={styles.row}>
-            <BottomSheetDropDownButton
-              isBottomSheetOpen={isBottomSheetOpen}
-              toggleBottomSheetOpen={toggleBottomSheet}
-              onOpen={toggleBottomSheet}
-              onClose={toggleBottomSheet}
-              selectedLanguage={selectedLanguage}
-            />
-            <View style={styles.runButton}>
-              <TouchableOpacity>
-                <Text style={styles.saveButton.text}>Compile </Text>
-              </TouchableOpacity>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <GestureHandlerRootView>
+        <ScrollView>
+          <View
+            style={{
+              paddingTop: Spacing.screenTop,
+            }}
+          >
+            <View style={styles.row}>
+              <BottomSheetDropDownButton
+                isBottomSheetOpen={isBottomSheetOpen}
+                toggleBottomSheetOpen={toggleBottomSheet}
+                onOpen={toggleBottomSheet}
+                onClose={toggleBottomSheet}
+                selectedLanguage={selectedLanguage}
+              />
 
-              <TouchableOpacity>
+              <TouchableOpacity style={styles.runButton} onPress={()=> setIsCompileModalOpen(true)}>
+                <Text style={styles.saveButton.text}>Compile </Text>
                 <Ionicons
                   name="bug-outline"
                   size={14}
-                  color={ColorStyles.secondaryColorBlue}
+                  color={ColorStyles.secondaryColor}
                 />
               </TouchableOpacity>
             </View>
-          </View>
-          <View>
-            <TouchableOpacity style={{ paddingHorizontal: Spacing.base }}>
-              <Text style={[styles.saveButton.text, {color: ColorStyles.white}]}>View Syntax</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={{ paddingHorizontal: Spacing.base }}>
+              <TouchableOpacity>
+                <Text
+                  style={[
+                    styles.saveButton.text,
+                    {
+                      color: ColorStyles.disabledGreyColor,
+                      fontWeight: FontWeight.light,
+                    },
+                  ]}
+                >
+                  View Syntax
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-          <TextInput
-            value={title}
-            onChangeText={handleTitleChange}
-            placeholderTextColor={ColorStyles.disabledGreyColor}
-            style={styles.inputs.title}
-            placeholder="Title Document" // Add other TextInput props as needed
-          />
-       
+            <TextInput
+              value={title}
+              onChangeText={handleTitleChange}
+              placeholderTextColor={ColorStyles.disabledGreyColor}
+              style={styles.inputs.title}
+              placeholder="Title Document" // Add other TextInput props as needed
+            />
+
             <CustomTextEditorInput
               language={selectedLanguage}
               code={code}
               setCode={setCode}
             />
-          
-        </View>
-      </ScrollView>
-      {isBottomSheetOpen ? (
-        <BottomSheet>
-          <LanguageSelectionRadioButtonList
-            selectedLanguage={selectedLanguage}
-            setSelectedLanguage={setSelectedLangauge}
-          />
-        </BottomSheet>
-      ) : null}
-    </GestureHandlerRootView>
+          </View>
+        </ScrollView>
+        {isBottomSheetOpen ? (
+          <BottomSheet>
+            <LanguageSelectionRadioButtonList
+              selectedLanguage={selectedLanguage}
+              setSelectedLanguage={setSelectedLangauge}
+            />
+          </BottomSheet>
+        ) : null}
+      </GestureHandlerRootView>
+      <View style={styles.test}>
+        <IntellisenseToolBar
+          code={code}
+          language={setSelectedLangauge}
+          setCode={setCode}
+        />
+      </View>
+      <CompiledCodeModal visibility= {isCompileModalOpen} setVisibility={setIsCompileModalOpen}/>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  test: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   row: {
     flexDirection: "row",
     paddingHorizontal: Spacing.base,
@@ -125,11 +158,9 @@ const styles = StyleSheet.create({
     text: {
       fontSize: FontSize.base,
       fontWeight: FontWeight.semibold,
-      color: ColorStyles.secondaryColorBlue,
+      color: ColorStyles.secondaryColor,
     },
   },
-
-
 
   inputs: {
     title: {

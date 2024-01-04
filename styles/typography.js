@@ -7,6 +7,7 @@ export const FontSize = {
 }
 
 export const FontWeight = {
+    light: "300",
     regular: "400",
     semibold: "500",
     bold: "700"
