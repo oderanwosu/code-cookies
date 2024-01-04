@@ -8,21 +8,23 @@ import { Spacing } from "../styles/spacings";
 import { ColorStyles } from "../styles/colors";
 import { FontSize, FontWeight } from "../styles/typography";
 
-export function RadioButtonOption() {
+export const RadioButtonOption = props => {
+  
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.onPress}>
       <View
         style={styles.row}
       >
         <View
           style={styles.outterCircle}
         >
-          <View
+          {props.option == props.selectedLanguage && <View
             style={styles.innerCircle}
-          ></View>
+          ></View>}
+          
         </View>
         <Text style={styles.optionText}>
-          Python
+          {props.option}
         </Text>
       </View>
     </TouchableOpacity>
@@ -32,33 +34,33 @@ export function RadioButtonOption() {
 const styles = StyleSheet.create({
   row: {
    
-    height: Size.s5,
+    height: Size.s6 + 4,
 
     flexDirection: "row",
-    alignItems: "baseline",
+    alignItems: "flex-end",
     justifyContent: "flex-start",
     padding: Spacing.base,
     paddingHorizontal: Spacing.large,
-    gap: Spacing.small,
+    gap: Spacing.base,
   },
 
   outterCircle: {
     height: Size.s4,
     width: Size.s4,
     borderWidth: 2,
-    borderRadius: Size.s2,
+    borderRadius: Size.s4,
     justifyContent: "center",
     alignItems: "center",
     borderColor: ColorStyles.disabledGreyColor,
   },
 
   innerCircle: {
-    height: Size.s4,
-    width: Size.s4,
+    height: Size.s3 + 2,
+    width: Size.s3 + 2,
     backgroundColor: ColorStyles.secondaryColor,
     borderRadius: Size.s5,
   },
   
-  optionText: { fontSize: FontSize.large, fontWeight: FontWeight.bold}
+  optionText: { fontSize: FontSize.large, fontWeight: FontWeight.bold, color: ColorStyles.white}
 
 })
