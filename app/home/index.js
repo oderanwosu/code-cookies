@@ -10,13 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SearchBar } from "../components/search-bar";
+import { SearchBar } from "../../components/search-bar.js";
 import { FontAwesome } from "@expo/vector-icons";
-import { NoteWidgetList } from "../components/note-widget-list";
-import { ColorStyles } from "../styles/colors";
+import { NoteWidgetList } from "../../components/note-widget-list.js";
+import { ColorStyles } from "../../styles/colors.js";
 
 
-export function HomeScreen() {
+export default function HomeScreen() {
   var notes = [{}, {}, {}, {}, {}];
   return (
     <SafeAreaView style={styles.screenStyle}>

@@ -1,14 +1,12 @@
 import "react-native-gesture-handler";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import { useFonts } from "expo-font";
-
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
-import { DocumentModifyingScreen } from "./screens/document-modifying-screen.js";
-import { ColorStyles } from "./styles/colors.js";
-import { FontFamily } from "./styles/typography.js";
-import * as Updates from "expo-updates";
+import { ColorStyles } from "../styles/colors.js";
+import { HomeScreen } from "./home/index.js";
+import { Slot } from "expo-router";
 
 // const setAndroidWindowSoftInputMode = async () => {
 //   try {
@@ -20,10 +18,10 @@ import * as Updates from "expo-updates";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function App() {
+export default function Layout() {
   const [fontsLoaded, fontError] = useFonts({
-    Inter: require("./assets/fonts/Inter-Regular.ttf"),
-    GeistMono: require("./assets/fonts/GeistMono-Regular.otf"),
+    Inter: require("./../assets/fonts/Inter-Regular.ttf"),
+    GeistMono: require("./../assets/fonts/GeistMono-Regular.otf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -39,14 +37,9 @@ export default function App() {
   return (
     <View
       onLayout={onLayoutRootView}
-      style={
-        {flex: 1,   backgroundColor: ColorStyles.backgroundColor,}
-      }
+      style={{ flex: 1, backgroundColor: ColorStyles.backgroundColor }}
     >
-      <DocumentModifyingScreen />
-     
-
-      </View>
-   
+      <Slot initialRouteName="/home"/>
+    </View>
   );
 }

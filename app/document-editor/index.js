@@ -9,22 +9,22 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { BottomSheetDropDown } from "../components/bottom-sheet";
-import { BottomSheet } from "../components/bottom-sheet";
-import { ScreenView } from "../components/screen-view";
-import { Spacing } from "../styles/spacings";
-import { FontFamily, FontSize, FontWeight } from "../styles/typography";
-import { ColorStyles } from "../styles/colors";
+import { BottomSheetDropDown } from "../../components/bottom-sheet";
+import { BottomSheet } from "../../components/bottom-sheet";
+import { ScreenView } from "../../components/screen-view";
+import { Spacing } from "../../styles/spacings";
+import { FontFamily, FontSize, FontWeight } from "../../styles/typography";
+import { ColorStyles } from "../../styles/colors";
 import {
   GestureHandlerRootView,
   ScrollView,
 } from "react-native-gesture-handler";
-import { BottomSheetDropDownButton } from "../components/bottom-sheet-dropdown-button";
-import { LanguageSelectionRadioButtonList } from "../components/language-selection-radio-button-list";
+import { BottomSheetDropDownButton } from "../../components/bottom-sheet-dropdown-button";
+import { LanguageSelectionRadioButtonList } from "../../components/language-selection-radio-button-list";
 import {
   CustomTextEditorInput,
   TextEditorInput,
-} from "../components/text-editor";
+} from "../../components/text-editor";
 import { KeyboardAccessoryView } from "react-native-keyboard-accessory";
 import {
   Entypo,
@@ -32,10 +32,10 @@ import {
   Ionicons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import { IntellisenseToolBar } from "../components/intellisense-toolbar";
-import { CompiledCodeModal, CompiledCodeScreen } from "./compiled-code-popup";
+import { IntellisenseToolBar } from "../../components/intellisense-toolbar";
+import { CompiledCodeModal, CompiledCodeScreen } from "../../components/compiled-code-popup";
 
-export function DocumentModifyingScreen() {
+export default function DocumentModifyingScreen() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isCompileModalOpen, setIsCompileModalOpen] = useState(false);
   const [selectedLanguage, setSelectedLangauge] = useState("Python");

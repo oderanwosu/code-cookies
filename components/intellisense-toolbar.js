@@ -14,7 +14,7 @@ export function IntellisenseToolBar(props) {
   const [codeSnippets, setSnippets] = useState([]);
 
   useEffect(() => {
-    console.log(searchCodeSnippets(props.code, jsCodeSnippets));
+   
     setSnippets(searchCodeSnippets(props.code, jsCodeSnippets));
   }, [props.code]);
 
