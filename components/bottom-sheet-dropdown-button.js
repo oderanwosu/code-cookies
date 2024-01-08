@@ -21,7 +21,6 @@ import {
 export function BottomSheetDropDownButton(props) {
   const animatedValue = new Animated.Value(0);
   var currentValue = 0;
-  
 
   animatedValue.addListener(({ value }) => {
     currentValue = value;
@@ -68,25 +67,27 @@ export function BottomSheetDropDownButton(props) {
     <View>
       <TouchableOpacity onPress={toggleSheet}>
         <View style={styles.row}>
-          <Animated.View style={rotateYAnimatedStyle}>
-            <Entypo
-              name="chevron-thin-down"
-              size={14}
-              color={ColorStyles.disabledGreyColor}
-            />
-          </Animated.View>
           <Text
             style={[
               styles.selectionText,
               {
                 color: props.isBottomSheetOpen
-                  ? ColorStyles.disabledGreyColor
-                  : ColorStyles.secondaryColorBlue,
+                  ? ColorStyles.textColor
+                  : ColorStyles.grey,
               },
             ]}
           >
             {props.selectedLanguage}
           </Text>
+          <Animated.View style={rotateYAnimatedStyle}>
+            <Entypo
+              name="chevron-thin-down"
+              size={14}
+              color={props.isBottomSheetOpen
+                ? ColorStyles.textColor
+                : ColorStyles.grey}
+            />
+          </Animated.View>
         </View>
       </TouchableOpacity>
     </View>
@@ -96,14 +97,14 @@ export function BottomSheetDropDownButton(props) {
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    gap: Spacing.small,
+    gap: Spacing.base,
     alignItems: "baseline",
   },
 
   selectionText: {
     fontSize: FontSize.large,
-    fontWeight: FontWeight.semibold,
-    color: ColorStyles.secondaryColorBlue,
+    fontWeight: FontWeight.light,
+    color: ColorStyles.textColor
   },
   bottomSheet: {
     container: {

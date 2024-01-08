@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
   tipText: {
     fontSize: FontSize.base,
     fontWeight: FontWeight.bold,
-    color: ColorStyles.disabledGreyColor,
+    color: ColorStyles.primaryColor,
   },
   tipTextContainer: {
     marginHorizontal: Spacing.large,

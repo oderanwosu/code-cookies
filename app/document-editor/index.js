@@ -27,13 +27,17 @@ import {
 } from "../../components/text-editor";
 import { KeyboardAccessoryView } from "react-native-keyboard-accessory";
 import {
+  AntDesign,
   Entypo,
   FontAwesome,
   Ionicons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
 import { IntellisenseToolBar } from "../../components/intellisense-toolbar";
-import { CompiledCodeModal, CompiledCodeScreen } from "../../components/compiled-code-popup";
+import {
+  CompiledCodeModal,
+  CompiledCodeScreen,
+} from "../../components/compiled-code-popup";
 
 export default function DocumentModifyingScreen() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -71,17 +75,18 @@ export default function DocumentModifyingScreen() {
                 onClose={toggleBottomSheet}
                 selectedLanguage={selectedLanguage}
               />
-
-              <TouchableOpacity style={styles.runButton} onPress={()=> setIsCompileModalOpen(true)}>
-                <Text style={styles.saveButton.text}>Compile </Text>
-                <Ionicons
-                  name="bug-outline"
-                  size={14}
-                  color={ColorStyles.secondaryColor}
+              <TouchableOpacity
+                style={styles.runButton}
+                onPress={() => setIsCompileModalOpen(true)}
+              >
+                <AntDesign
+                  name="codesquareo"
+                  size={FontSize.large}
+                  color={ColorStyles.codeColor}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ paddingHorizontal: Spacing.base }}>
+            {/* <View style={{ paddingHorizontal: Spacing.base }}>
               <TouchableOpacity>
                 <Text
                   style={[
@@ -95,12 +100,12 @@ export default function DocumentModifyingScreen() {
                   View Syntax
                 </Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
 
             <TextInput
               value={title}
               onChangeText={handleTitleChange}
-              placeholderTextColor={ColorStyles.disabledGreyColor}
+              placeholderTextColor={ColorStyles.disabledColor}
               style={styles.inputs.title}
               placeholder="Title Document" // Add other TextInput props as needed
             />
@@ -128,7 +133,10 @@ export default function DocumentModifyingScreen() {
           setCode={setCode}
         />
       </View>
-      <CompiledCodeModal visibility= {isCompileModalOpen} setVisibility={setIsCompileModalOpen}/>
+      <CompiledCodeModal
+        visibility={isCompileModalOpen}
+        setVisibility={setIsCompileModalOpen}
+      />
     </View>
   );
 }
@@ -142,16 +150,15 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    paddingHorizontal: Spacing.base,
+    paddingHorizontal: Spacing.large,
     justifyContent: "space-between",
     marginVertical: Spacing.base,
+    alignItems: "center"
   },
 
   runButton: {
-    flexDirection: "row",
-    gap: Spacing.small,
-    justifyContent: "space-between",
-    alignItems: "center",
+    
+    paddingHorizontal: 16,
   },
 
   saveButton: {
@@ -164,17 +171,17 @@ const styles = StyleSheet.create({
 
   inputs: {
     title: {
-      paddingHorizontal: Spacing.base,
+      paddingHorizontal: Spacing.large,
       fontSize: FontSize.xlarge,
       fontWeight: FontWeight.semibold,
-      color: ColorStyles.white,
+      color: ColorStyles.textColor,
       marginVertical: Spacing.base,
     },
     body: {
       paddingHorizontal: Spacing.base,
       fontSize: FontSize.base,
       fontFamily: FontFamily.code,
-      color: ColorStyles.white,
+      color: ColorStyles.textColor,
     },
   },
 });

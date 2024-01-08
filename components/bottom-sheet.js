@@ -44,17 +44,6 @@ export function BottomSheet(props) {
 }
 
 export const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    gap: Spacing.small,
-    alignItems: "baseline",
-  },
-
-  selectionText: {
-    fontSize: FontSize.large,
-    fontWeight: FontWeight.semibold,
-    color: ColorStyles.secondaryColor,
-  },
   bottomSheet: {
     container: {
       width: "100%",
@@ -62,12 +51,12 @@ export const styles = StyleSheet.create({
       position: "absolute",
       top: SCREEN_HEIGHT / 1.5,
       borderRadius: Size.s4,
-      backgroundColor: ColorStyles.foreGroundColor,
+      backgroundColor: "#20242B",
     },
     line: {
       height: Size.s1,
       width: 72,
-      backgroundColor: ColorStyles.disabledGreyColor,
+      backgroundColor: ColorStyles.grey,
       alignSelf: "center",
       marginVertical: Spacing.base,
       borderRadius: Size.s1,

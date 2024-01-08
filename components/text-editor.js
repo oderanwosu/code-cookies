@@ -17,7 +17,7 @@ import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { FontFamily, FontSize } from "../styles/typography";
 import { Spacing } from "../styles/spacings";
 import { ColorStyles } from "../styles/colors";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../styles/sizes";
+import { SCREEN_HEIGHT, SCREEN_WIDTH, Size } from "../styles/sizes";
 import {
   KeyboardAccessoryNavigation,
   KeyboardAccessoryView,
@@ -47,7 +47,7 @@ export function CustomTextEditorInput(props) {
         style={styles.code}
         multiline
         placeholder="Begin typing here..."
-        placeholderTextColor={ColorStyles.disabledGreyColor}
+        placeholderTextColor={ColorStyles.disabledColor}
       />
     </View>
   );
@@ -59,9 +59,10 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   code: {
-    paddingHorizontal: Spacing.base,
+    paddingHorizontal: Spacing.large,
     fontSize: FontSize.base,
     fontFamily: FontFamily.code,
-    color: ColorStyles.white,
+    color: ColorStyles.textColor,
+    lineHeight: Size.s4
   },
 });

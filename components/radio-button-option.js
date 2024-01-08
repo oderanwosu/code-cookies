@@ -51,16 +51,16 @@ const styles = StyleSheet.create({
     borderRadius: Size.s4,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: ColorStyles.disabledGreyColor,
+    borderColor: ColorStyles.primaryColor,
   },
 
   innerCircle: {
     height: Size.s3 + 2,
     width: Size.s3 + 2,
-    backgroundColor: ColorStyles.secondaryColor,
+    backgroundColor: ColorStyles.primaryColor,
     borderRadius: Size.s5,
   },
   
-  optionText: { fontSize: FontSize.large, fontWeight: FontWeight.bold, color: ColorStyles.white}
+  optionText: { fontSize: FontSize.large, fontWeight: FontWeight.bold, color: ColorStyles.primaryColor}
 
 })

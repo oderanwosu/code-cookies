@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -7,6 +7,7 @@ import { useCallback } from "react";
 import { ColorStyles } from "../styles/colors.js";
 import { HomeScreen } from "./home/index.js";
 import { Slot } from "expo-router";
+
 
 // const setAndroidWindowSoftInputMode = async () => {
 //   try {
@@ -35,11 +36,14 @@ export default function Layout() {
   }
 
   return (
-    <View
-      onLayout={onLayoutRootView}
-      style={{ flex: 1, backgroundColor: ColorStyles.backgroundColor }}
-    >
-      <Slot initialRouteName="/home"/>
-    </View>
+    <>
+      <StatusBar barStyle="light-content" />
+      <View
+        onLayout={onLayoutRootView}
+        style={{ flex: 1, backgroundColor: ColorStyles.backgroundColor }}
+      >
+        <Slot initialRouteName="/home" />
+      </View>
+    </>
   );
 }

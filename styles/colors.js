@@ -1,14 +1,10 @@
-import { Colors } from "react-native/Libraries/NewAppScreen";
-
 export const ColorStyles = {
-  backgroundColor: "#1E232C",
-  foreGroundColor: "#232A35",
-  elevatedColor: "#171A1F",
-  primaryColor: "#E48DDB",
-  secondaryColor: "#8DE496",
-  secondaryColorBlue: "#8DDFE4",
-  accentColor: "#9B9B9C",
-  white: "#FFFFFF",
-  disabledGreyColor: "#9C9C9C",
-
+  primaryColor: "#F0EFF9",
+  secondaryColor: "#0F1011",
+  accentColor: "#2A3241",
+  textColor: "#F0EFF9",
+  backgroundColor: "#1B1D22",
+  grey: "#8D9199",
+  disabledColor: "#5B616C",
+  codeColor: "#8DE496"
 };

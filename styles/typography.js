@@ -3,7 +3,7 @@ export const FontSize = {
     small: 14,
     base: 16,
     large: 20,
-    xlarge: 24
+    xlarge: 36
 }
 
 export const FontWeight = {
