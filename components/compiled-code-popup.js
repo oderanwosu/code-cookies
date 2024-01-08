@@ -30,7 +30,7 @@ export function CompiledCodeModal(props) {
         <View style={styles.modalView}>
           <TouchableWithoutFeedback>
             <ScrollView>
-              <Text style={styles.output}>The code failed to compile</Text>
+              <Text style={styles.output}>{props.output}</Text>
             </ScrollView>
           </TouchableWithoutFeedback>
         </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.xsmall,
     fontWeight: FontWeight.regular,
     fontFamily: FontFamily.code,
-    color: ColorStyles.white,
+    color: ColorStyles.codeColor,
   },
 
   header: {

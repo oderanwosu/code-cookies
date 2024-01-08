@@ -15,7 +15,7 @@ export function LanguageSelectionRadioButtonList(props) {
         <Text style={styles.tipText}>Select text language</Text>
       </View>
       <View>
-        {["Python", "Javascript", "Dart", "GoLang"].map((languageOption) => (
+        {["Python3", "NodeJS", "Dart", "C"].map((languageOption) => (
           <RadioButtonOption
             key={languageOption}
             option={languageOption}

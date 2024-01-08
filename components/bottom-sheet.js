@@ -27,7 +27,7 @@ export function BottomSheet(props) {
         scrollTo(MAX_TRANSLATE_Y);
       }
     });
- 
+
   const rBottomSheetStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }],

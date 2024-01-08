@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import {
   View,
-  SafeAreaView,
-  Text,
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 
-import { BottomSheetDropDown } from "../../components/bottom-sheet";
 import { BottomSheet } from "../../components/bottom-sheet";
-import { ScreenView } from "../../components/screen-view";
 import { Spacing } from "../../styles/spacings";
 import { FontFamily, FontSize, FontWeight } from "../../styles/typography";
 import { ColorStyles } from "../../styles/colors";
@@ -21,37 +19,55 @@ import {
 } from "react-native-gesture-handler";
 import { BottomSheetDropDownButton } from "../../components/bottom-sheet-dropdown-button";
 import { LanguageSelectionRadioButtonList } from "../../components/language-selection-radio-button-list";
-import {
-  CustomTextEditorInput,
-  TextEditorInput,
-} from "../../components/text-editor";
-import { KeyboardAccessoryView } from "react-native-keyboard-accessory";
-import {
-  AntDesign,
-  Entypo,
-  FontAwesome,
-  Ionicons,
-  SimpleLineIcons,
-} from "@expo/vector-icons";
+import { CustomTextEditorInput } from "../../components/text-editor";
+import { AntDesign } from "@expo/vector-icons";
 import { IntellisenseToolBar } from "../../components/intellisense-toolbar";
-import {
-  CompiledCodeModal,
-  CompiledCodeScreen,
-} from "../../components/compiled-code-popup";
+import { CompiledCodeModal } from "../../components/compiled-code-popup";
+import { getCodeOutputfromAPI } from "../../api/code-compiler";
+
+const ErrorAlert = () =>
+  Alert.alert(
+    "Oops there was an error (not with your code)",
+    "There was a request error when trying to compile.",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") },
+    ]
+  );
 
 export default function DocumentModifyingScreen() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isCompileModalOpen, setIsCompileModalOpen] = useState(false);
-  const [selectedLanguage, setSelectedLangauge] = useState("Python");
+  const [selectedLanguage, setSelectedLangauge] = useState("Python3");
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
-
+  const [isCompileStateLoading, setIsCompileStateLoading] = useState(false);
+  var output = useRef("");
   const toggleBottomSheet = () => {
     setIsBottomSheetOpen((currentValue) => !currentValue);
   };
 
   const handleTitleChange = (text) => {
     setTitle(text);
+  };
+
+  const handleCompilePress = async () => {
+    try {
+      setIsCompileStateLoading(true);
+      let data = await getCodeOutputfromAPI(code, selectedLanguage);
+
+      output.current = data;
+      setIsCompileModalOpen(true);
+    } catch (error) {
+      setIsCompileStateLoading(false);
+      ErrorAlert();
+    } finally {
+      setIsCompileStateLoading(false);
+    }
   };
 
   return (
@@ -75,16 +91,23 @@ export default function DocumentModifyingScreen() {
                 onClose={toggleBottomSheet}
                 selectedLanguage={selectedLanguage}
               />
-              <TouchableOpacity
-                style={styles.runButton}
-                onPress={() => setIsCompileModalOpen(true)}
-              >
-                <AntDesign
-                  name="codesquareo"
-                  size={FontSize.large}
-                  color={ColorStyles.codeColor}
+              {isCompileStateLoading ? (
+                <ActivityIndicator
+                  size="small"
+                  color={ColorStyles.primaryColor}
                 />
-              </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.runButton}
+                  onPress={handleCompilePress}
+                >
+                  <AntDesign
+                    name="codesquareo"
+                    size={FontSize.large}
+                    color={ColorStyles.codeColor}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
             {/* <View style={{ paddingHorizontal: Spacing.base }}>
               <TouchableOpacity>
@@ -134,6 +157,7 @@ export default function DocumentModifyingScreen() {
         />
       </View>
       <CompiledCodeModal
+        output={output.current}
         visibility={isCompileModalOpen}
         setVisibility={setIsCompileModalOpen}
       />
@@ -153,11 +177,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     justifyContent: "space-between",
     marginVertical: Spacing.base,
-    alignItems: "center"
+    alignItems: "center",
   },
 
   runButton: {
-    
     paddingHorizontal: 16,
   },
 
